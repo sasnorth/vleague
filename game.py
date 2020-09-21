@@ -89,7 +89,7 @@ for pg in range(1,pages+1):
             parse_html = BeautifulSoup(response, 'html.parser')
             table_ha = parse_html.find_all('table')[0]
             td_ha = table_ha.find_all('td', class_='team')
-        #     print(td_ha)
+            # print(td_ha)
             team = td_ha[j].text
             print('team={}'.format(team))
             new_stats['アタック決定率'] = new_stats['アタック得点'] / new_stats['アタック打数']
