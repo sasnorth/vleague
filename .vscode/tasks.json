@@ -7,6 +7,11 @@
             "label": "build",
             "type": "shell",
             "command": "msbuild",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\wsl.exe",
+                }
+            },
             "args": [
                 // Ask msbuild to generate full paths for file names.
                 "/property:GenerateFullPaths=true",
