@@ -1,29 +1,14 @@
 import pandas as pd
 import os
+import team_index
 
 os.chdir('/Users/sasno/Desktop/MyPandas/vleague')
 print('ディビジョンを選択してください:{v1_m, v2_m, v3_m, v1_w, v2_w}')
 division = input()
-# judge = True
-# while(judge):
-#     if (division == 'v1_m' or division == 'v1-m' or division == 'V1男子' or division == 'V1MEN'):
-#         division = 'v1_m'
-#         judge = False
-#     elif (division == 'v1_w' or division == 'v1-w' or division == 'V1女子' or division == 'V1WOMEN'):
-#         division = 'v1_w'
-#         judge = False
-#     elif (division == 'v2_m' or division == 'v2-m' or division == 'V2男子' or division == 'V2MEN'):
-#         division = 'v2_m'
-#         judge = False
-#     elif (division == 'v2_w' or division == 'v2-w' or division == 'V2女子' or division == 'V2WOMEN'):
-#         division = 'v2_w'
-#         judge = False
-#     elif (division == 'v3_m' or division == 'v3-m' or division == 'V3男子' or division == 'V3MEN'):
-#         division = 'v3_m'
-#         judge = False
 
-# print('年度を選択してください:{19-20, 18-19, 17-18, 16-17, 15-14}')
-# year = input()
+
+print('年度を選択してください:{2019-20_regular,2018-19_regular, 2017-18_regular, 2016-17_regular, 2015-14_regular}')
+year = input()
 
 
 month_list = ['-10-', '-11-', '-12-', '-01-','-02']
@@ -34,16 +19,16 @@ print(team_list)
 os.chdir(division)
 
 for team in team_list:
-    monthly_dir = '{}/game_2019-20/monthly'.format(team)
+    monthly_dir = '{0}/{1}/monthly'.format(team,year)
     if not os.path.isdir(monthly_dir):
         os.makedirs(monthly_dir)
-    path = '{}\game_2019-20'.format(team)
+    path = '{0}\{1}'.format(team,year)
     files = os.listdir(path)
     files_file = [f for f in files if os.path.isfile(os.path.join(path, f))]
     print(files_file)
     data_list = []
     for i in files_file:
-        data = pd.read_csv('{0}\game_2019-20\{1}'.format(team, i), encoding='cp932')
+        data = pd.read_csv('{0}\{}\{1}'.format(team, i), encoding='cp932')
         data_list.append(data[:-1])
         game_data = pd.concat(data_list, ignore_index = True)
     # print(game_data)
@@ -100,6 +85,6 @@ for team in team_list:
                 number = month_sum['背番号']
                 loc_num += 1
         print(month_stats)
-        month_stats.to_csv('{0}/game_2019-20/monthly/{1}_{2}.csv'.format(team,number,player), index=False, encoding='cp932')
+        month_stats.to_csv('{0}/{1}/monthly/{2}_{3}.csv'.format(team,year,number,player), index=False, encoding='cp932')
         print('{0}_{1}.csvを作成'.format(number,player))
 
