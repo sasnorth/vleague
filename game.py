@@ -16,6 +16,9 @@ headers = {"User-Agent": "Mozilla/5.0"}
 print('ディビジョンを選択してください:{v1_m, v2_m, v3_m, v1_w, v2_w}')
 division = input()
 
+print('年度・シーズンを選択してください:{2019-20_regular,2018-19_regular, 2017-18_regular, 2016-17_regular, 2015-14_regular}')
+season = input()
+
 # 19-20シーズン
 divisions = {
     "283":["v1_m",7],
@@ -35,6 +38,8 @@ if not os.path.isdir(division):
 
 os.chdir(division)
 print(os.getcwd())
+
+sets = ['1','2','3','4','5']
 
 for pg in range(1,pages+1):
     url = 'https://www.vleague.jp/round/list/{0}?pg={1}'.format(division_id,pg)
@@ -97,7 +102,9 @@ for pg in range(1,pages+1):
             span = parse_html.find_all('span')
             date = span[1].text.replace('/','-')
             new_stats.insert(0, '試合日', date)
-            team_dir = '{}/2019-20_regular'.format(team)
+            for by_set in sets:
+                new_stats[by_set] = new_stats[by_set].astype(str)
+            team_dir = '{0}/{1}'.format(team,season)
             if not os.path.isdir(team_dir):
                 os.makedirs(team_dir)
-            new_stats.to_csv('{0}/2019-20_regular/{1}.csv'.format(team, date), index=False, encoding='cp932')
+            new_stats.to_csv('{0}/{1}/{2}.csv'.format(team,season,date), index=False, encoding='cp932')

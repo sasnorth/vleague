@@ -7,11 +7,11 @@ print('ディビジョンを選択してください:{v1_m, v2_m, v3_m, v1_w, v2
 division = input()
 
 
-print('年度を選択してください:{2019-20_regular,2018-19_regular, 2017-18_regular, 2016-17_regular, 2015-14_regular}')
-year = input()
+print('年度・シーズンを選択してください:{2019-20_regular,2018-19_regular, 2017-18_regular, 2016-17_regular, 2015-14_regular}')
+season = input()
 
 
-month_list = ['-10-', '-11-', '-12-', '-01-','-02']
+month_list = ['-10-', '-11-', '-12-', '-01-','-02-']
 set_sum = ['1','2','3','4','5']
    
 team_list = os.listdir(division)
@@ -19,20 +19,21 @@ print(team_list)
 os.chdir(division)
 
 for team in team_list:
-    monthly_dir = '{0}/{1}/monthly'.format(team,year)
+    print(team)
+    monthly_dir = '{0}/{1}/monthly'.format(team,season)
     if not os.path.isdir(monthly_dir):
         os.makedirs(monthly_dir)
-    path = r'{0}\{1}'.format(team,year)
+    path = r'{0}\{1}'.format(team,season)
     files = os.listdir(path)
     files_lists = [f for f in files if os.path.isfile(os.path.join(path, f))]
     print(files_lists)
     data_list = []
     if len(files_lists) > 0:
         for i in files_lists:
-            data = pd.read_csv('{0}\{1}\{2}'.format(team,year,i), encoding='cp932')
+            data = pd.read_csv(r'{0}\{1}\{2}'.format(team,season,i), encoding='cp932')
             data_list.append(data[:-1])
             game_data = pd.concat(data_list, ignore_index = True)
-        # print(game_data)
+        print(game_data)
         player_list = game_data['名前'].unique()
         # print(len(player_list),player_list)
         for player in player_list:
@@ -49,7 +50,8 @@ for team in team_list:
                 if len(by_month_stats) > 0:
                     month_sum = by_month_stats.sum()
                     for by_set in set_sum:
-                        month_sum[by_set] = by_month_stats[by_set].str.contains('■').sum()
+                        if by_month_stats[by_set].dtype == object:
+                            month_sum[by_set] = by_month_stats[by_set].str.contains('■').sum() + by_month_stats[by_set].str.contains('●').sum()
                     index = by_month_stats.index.values[0]
                     print(player, index)
                     ob_data = daily_stats.loc[index]
@@ -86,6 +88,6 @@ for team in team_list:
                     number = month_sum['背番号']
                     loc_num += 1
             print(month_stats)
-            month_stats.to_csv('{0}/{1}/monthly/{2}_{3}.csv'.format(team,year,number,player), index=False, encoding='cp932')
+            month_stats.to_csv('{0}/{1}/monthly/{2}_{3}.csv'.format(team,season,number,player), index=False, encoding='cp932')
             print('{0}_{1}.csvを作成'.format(number,player))
 
