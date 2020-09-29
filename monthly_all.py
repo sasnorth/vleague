@@ -72,7 +72,8 @@ for team in team_list:
                     month_stats.loc[loc_num] = month_sum
                     number = month_sum['背番号']
                     loc_num += 1
+            month_stats.insert(1,'チーム',team)
             print(month_stats)
-            month_stats.to_csv('{0}/{1}/monthly/{2}_{3}.csv'.format(team,season,number,player), index=False, encoding='cp932')
+            month_stats.to_csv('all/{0}/monthly/{1}_{2}.csv'.format(season,number,player), index=False, encoding='cp932')
             print('{0}_{1}.csvを作成'.format(number,player))
 

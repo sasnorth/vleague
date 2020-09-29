@@ -1,6 +1,8 @@
 import pandas as pd
 import os
+
 import team_index
+from percentage import *
 
 os.chdir('/Users/sasno/Desktop/MyPandas/vleague')
 print('ディビジョンを選択してください:{v1_m, v2_m, v3_m, v1_w, v2_w}')
@@ -62,30 +64,13 @@ if len(files_lists) > 0:
                 month_sum['背番号'] = ob_data['背番号']
                 month_sum['リベロ'] = ob_data['リベロ']
                 month_sum['名前'] = ob_data['名前']
-                if month_sum['アタック打数'] > 0:
-                    month_sum['アタック決定率'] = (month_sum['アタック得点'] / month_sum['アタック打数']) * 100
-                    month_sum['アタック効果率'] = ((month_sum['アタック得点'] - month_sum['アタック失点']) / month_sum['アタック打数']) * 100
-                else:
-                    month_sum['アタック決定率'] = None
-                    month_sum['アタック効果率'] = None
-                if month_sum['バックアタック打数'] > 0:
-                    month_sum['バックアタック決定率'] = (month_sum['バックアタック得点'] / month_sum['バックアタック打数']) * 100
-                else:
-                    month_sum['バックアタック決定率'] = None
-                if month_sum['出場数'] > 0:
-                    month_sum['アタックセット平均'] = month_sum['アタック打数'] / month_sum['出場数']
-                    month_sum['ブロックセット平均'] = month_sum['ブロック得点'] / month_sum['出場数']
-                else:
-                    month_sum['アタックセット平均'] = None
-                    month_sum['ブロックセット平均'] = None
-                if month_sum['サーブ打数'] > 0:
-                    month_sum['サーブ効果率'] = ((month_sum['サーブ得点'] * 100) + (month_sum['サーブ効果'] * 25) - (month_sum['サーブ失点'] * 25)) / month_sum['サーブ打数']
-                else:
-                    month_sum['サーブ効果率'] = None
-                if month_sum['受数'] > 0:
-                    month_sum['サーブレシーブ成功率'] = ((month_sum['サーブレシーブ成功・優'] * 100) + (month_sum['サーブレシーブ成功・良'] * 50)) / month_sum['受数']
-                else:
-                    month_sum['サーブレシーブ成功率'] = None
+                pctg(month_sum, 'アタック決定率', 'アタック得点', 'アタック打数')
+                eff(month_sum, 'アタック効果率', 'アタック得点', 'アタック失点', 'アタック打数')
+                pctg(month_sum, 'バックアタック決定率', 'バックアタック得点', 'バックアタック打数')
+                per_set(month_sum, 'アタックセット平均', 'アタック得点', '出場数')
+                per_set(month_sum, 'ブロックセット平均', 'ブロック得点', '出場数')
+                serve_eff(month_sum, 'サーブ効果率', 'サーブ得点', 'サーブ効果', 'サーブ失点', 'サーブ打数')
+                cut_pctg(month_sum, 'サーブレシーブ成功率', 'サーブレシーブ成功・優', 'サーブレシーブ成功・良', '受数')
                 month_stats.loc[loc_num] = month_sum
                 number = month_sum['背番号']
                 loc_num += 1

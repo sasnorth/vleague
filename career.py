@@ -12,6 +12,7 @@ import re
 import glob
 
 from team_index import get_teams
+from header_rename import rename
 
 now = datetime.datetime.now()
 
