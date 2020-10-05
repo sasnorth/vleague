@@ -36,7 +36,7 @@ for team in team_list:
         for i in files_lists:
             data = pd.read_csv(r'{0}\{1}\{2}'.format(team,season,i), encoding='cp932')
             data_list.append(data[:-1])
-            game_data = pd.concat(data_list, ignore_index = True)
+        game_data = pd.concat(data_list, ignore_index = True)
         print(game_data)
         player_list = game_data['名前'].unique()
         # print(len(player_list),player_list)

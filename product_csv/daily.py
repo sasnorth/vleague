@@ -13,6 +13,7 @@ team_list = os.listdir(division)
 print(team_list)
 os.chdir(division)
 
+all_list = []
 for team in team_list:
     print('チーム:{}'.format(team))
     # ディレクトリ：dailyを作成
@@ -38,5 +39,9 @@ for team in team_list:
         # print(len(player_list),player_list)
         for i in range(len(player_list)):
             daily_stats = game_data[game_data['名前'] == player_list[i]]
-            daily_stats.to_csv('{0}/{1}/daily/{2}_{3}_dailystats.csv'.format(team,season,number_list[i],player_list[i]), index=False, encoding='cp932')
-            print('{0}_{1}_dailystats.csvを作成'.format(number_list[i],player_list[i]))
+            # daily_stats.to_csv('{0}/{1}/daily/{2}_{3}_dailystats.csv'.format(team,season,number_list[i],player_list[i]), index=False, encoding='cp932')
+            # print('{0}_{1}_dailystats.csvを作成'.format(number_list[i],player_list[i]))
+            all_list.append(daily_stats)
+
+daily_all = pd.concat(all_list, ignore_index=True)
+daily_all.to_csv('all/{}/daily/all.csv'.format(season), index=False, encoding='cp932')
