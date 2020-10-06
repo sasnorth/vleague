@@ -24,7 +24,7 @@ division = input()
 
 print('年度・シーズンを選択してください:{2019-20_regular,2018-19_regular, 2017-18_regular, 2016-17_regular, 2015-14_regular}')
 season = input()
-# divisions = get_seasons(season)
+divisions = get_seasons(season)
 
 for div_id, div_v in divisions.items():
     if division == div_v[0]:
