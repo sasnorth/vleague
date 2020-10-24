@@ -1,7 +1,7 @@
 def get_seasons(division):
     if division == 'v1_m':
         return {
-            # "301": "2020-21_regular",
+            "301": "2020-21_regular",
             "283": "2019-20_regular",
             "296": "2019-20_game1",
             "297": "2019-20_game2",
@@ -70,9 +70,9 @@ def get_seasons(division):
         }
     if division == 'v1_w':
         return {
-            # "303": "2020-21_regular",
-            # "304": "2020-21_Vcup_r",
-            # "305": "2020-21_Vcup_f",
+            "303": "2020-21_regular",
+            "304": "2020-21_Vcup_r",
+            "305": "2020-21_Vcup_f",
             "277": "2019-20_regular",
             "279": "2019-20_final8_a",
             "293": "2019-20_final8_b",
@@ -145,7 +145,7 @@ def get_seasons(division):
         }
     if division == 'v2_m':
         return {
-            # "299": "2020-21_regular",
+            "299": "2020-21_regular",
             "288": "2019-20_regular",
             "266": "2018-19_regular",
             "247": "2017-18_regular",
@@ -168,7 +168,7 @@ def get_seasons(division):
         }
     if division == 'v2_w':
         return {
-            # "302": "2020-21_regular",
+            "302": "2020-21_regular",
             "281": "2019-20_regular",
             "290": "2019-20_final6",
             "264": "2018-19_regular",
@@ -190,7 +190,7 @@ def get_seasons(division):
         }
     if division == 'v3_m':
         return {
-            # "300": "2020-21_regular",
+            "300": "2020-21_regular",
             "287": "2019-20_regular",
             "267": "2018-19_regular",
             "250": "2017-18_regular",
@@ -199,7 +199,7 @@ def get_seasons(division):
         }
     if division == 'v3_w':
         return {
-            # "268": "2020-21_regular",
+            "268": "2020-21_regular",
             "249": "2019-20_regular",
             "229": "2018-19_regular",
             "195": "2017-18_regular",
