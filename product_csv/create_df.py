@@ -91,9 +91,3 @@ def game_df(url,headers,s_round,all_list):
                     all_list.append(new_stats)
             except:
                 pass
-    try:
-        game_all = pd.concat(all_list, ignore_index=True)
-        print(game_all)
- 
-    except:
-        pass
