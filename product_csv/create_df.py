@@ -68,7 +68,9 @@ def game_df(url,headers,s_round,all_list):
                     parse_html = BeautifulSoup(response, 'html.parser')
                     table_ha = parse_html.find_all('table')[0]
                     td_ha = table_ha.find_all('td', class_='team')
+                    td_set = table_ha.find_all('td', class_='b')
                     # print(td_ha)
+                    get_set = td_set[j].text
                     team = td_ha[j].text
                     o_team = td_ha[-(j+1)].text
                     # print('team={}'.format(team))
@@ -80,6 +82,7 @@ def game_df(url,headers,s_round,all_list):
                     new_stats.insert(0, '試合日', date)
                     new_stats.insert(1, 'チーム', team)
                     new_stats.insert(2, '相手チーム', o_team)
+                    new_stats.insert(3, '勝敗', )
                     new_stats['名前'] = new_stats['名前'].str.replace('\u3000','')
                     for by_set in sets:
                         new_stats[by_set] = new_stats[by_set].astype(str)
