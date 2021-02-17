@@ -11,7 +11,7 @@ import datetime
 import re
 import glob
 
-from team_index import get_teams
+from ../team/team_index import get_teams
 
 now = datetime.datetime.now()
 
