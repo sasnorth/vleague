@@ -200,7 +200,7 @@ def get_seasons(division):
     if division == 'v3_w':
         return {
             "268": "2020-21_regular",
-            "249": "2019-20_regular",
-            "229": "2018-19_regular",
-            "195": "2017-18_regular",
+            "249": "2017-18_regular",
+            "229": "2016-17_regular",
+            "195": "2015-16_regular",
         }
