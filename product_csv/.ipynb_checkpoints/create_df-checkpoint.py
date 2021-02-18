@@ -10,12 +10,8 @@ import os
 import datetime
 import re
 
-headers = {"User-Agent": "Mozilla/5.0"}
-
-sets = ['1','2','3','4','5']
-
 def game_df(url, s_round, all_list):
-    headers = {"User-Agent": "Mozilla/5.0"}
+#     headers = {"User-Agent": "Mozilla/5.0"}
     request = req.Request(url, headers=headers)
     response = req.urlopen(request)
     parse_html = BeautifulSoup(response, 'html.parser')
