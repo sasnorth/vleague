@@ -70,6 +70,7 @@ def get_seasons(division):
         }
     if division == 'v1_w':
         return {
+            '304': '2021_vcup'
             "303": "2020-21_regular",
             "304": "2020-21_Vcup_r",
             "305": "2020-21_Vcup_f",
